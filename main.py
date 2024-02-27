@@ -1,8 +1,10 @@
 import csv
 import shutil
 from pptx import Presentation
+import os
 
 BASE_FILE='model.pptx'
+OUT_PUT_DIR='outputs'
 
 
 def read_csv(file_name):
@@ -31,7 +33,7 @@ for person in values:
     output_file = person[1]+'.pptx'
     shutil.copy(BASE_FILE, output_file)
     for index,item in enumerate(person):
-        replace_value(output_file,"#-{attributes[index]}-#",item)
+        replace_value(output_file,f"#-{attributes[index]}-#",item)
         print(attributes[index]+"="+str(item))
   
         
