@@ -6,6 +6,9 @@ import os
 BASE_FILE='model.pptx'
 OUT_PUT_DIR='outputs'
 
+if not os.path.exists(OUT_PUT_DIR):
+    os.makedirs(OUT_PUT_DIR)
+
 
 def read_csv(file_name):
     with open(file_name, 'r', newline='', encoding='utf-8') as data:
@@ -14,7 +17,6 @@ def read_csv(file_name):
         attributes = data_persons[0]
         values = data_persons[1:]
         return [attributes,values]
-
 
 def replace_value(nome_arquivo, texto_antigo, texto_novo):
     prs = Presentation(nome_arquivo)
@@ -30,8 +32,8 @@ attributes,values = read_csv(file_name='data.csv')
 
 
 for person in values:
-    output_file = person[1]+'.pptx'
-    shutil.copy(BASE_FILE, output_file)
+    output_file = OUT_PUT_DIR+"/"+person[1]+'.pptx'
+    shutil.copy(BASE_FILE,output_file)
     for index,item in enumerate(person):
         replace_value(output_file,f"#-{attributes[index]}-#",item)
         print(attributes[index]+"="+str(item))
