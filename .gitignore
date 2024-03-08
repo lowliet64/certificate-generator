@@ -2,3 +2,7 @@
 *model.pptx
 *data.csv
 *outputs
+
+__pycache__
+data
+build
